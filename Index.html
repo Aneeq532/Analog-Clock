@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="clock">
+        <div class="clock-face">
+            <div class="hand hour" id="hour-hand"></div>
+            <div class="hand minute" id="minute-hand"></div>
+            <div class="hand second" id="second-hand"></div>
+            <div class="center-dot"></div>
+            <!-- Numbers -->
+            <div class="number" style="top: 20px; left: 50%; transform: translate(-50%, -50%);">12</div>
+            <div class="number" style="top: 50%; left: 280px; transform: translate(-50%, -50%);">3</div>
+            <div class="number" style="top: 280px; left: 50%; transform: translate(-50%, -50%);">6</div>
+            <div class="number" style="top: 50%; left: 20px; transform: translate(-50%, -50%);">9</div>
+        </div>
+    </div>
+    <script>
+        function updateAnalogClock() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            const secondDeg = seconds * 6;
+            const minuteDeg = minutes * 6 + seconds * 0.1;
+            const hourDeg = ((hours % 12) * 30) + (minutes * 0.5);
+
+            document.getElementById('second-hand').style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
+            document.getElementById('minute-hand').style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+            document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+        }
+        setInterval(updateAnalogClock, 1000);
+        updateAnalogClock();
+    </script>
+</body>
+
+</html>
